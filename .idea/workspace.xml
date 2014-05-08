@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ba81a547-d1a7-4a78-a777-4eac26900261" name="Default" comment="" />
+    <list default="true" id="ba81a547-d1a7-4a78-a777-4eac26900261" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pazzos/Pazzos/settings.py" afterPath="$PROJECT_DIR$/Pazzos/Pazzos/settings.py" />
+    </list>
     <ignored path="CSC394Team5.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +23,33 @@
   <component name="FavoritesManager">
     <favorites_list name="CSC394Team5" />
   </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="settings.py" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Pazzos/Pazzos/settings.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="38" column="8" selection-start="1016" selection-end="1016" vertical-scroll-proportion="0.4840871" vertical-offset="357" max-vertical-offset="1513">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/Pazzos/Pazzos/settings.py" />
+      </list>
+    </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="1912" />
@@ -89,6 +116,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CSC394Team5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="CSC394Team5" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pazzos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Pazzos" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -143,6 +188,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/Pazzos/Pazzos/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="38" column="8" selection-start="1016" selection-end="1016" vertical-scroll-proportion="0.4840871" vertical-offset="357" max-vertical-offset="1513">
+          <folding />
+        </state>
+      </provider>
+    </entry>
   </component>
 </project>
 
