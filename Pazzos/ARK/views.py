@@ -47,9 +47,11 @@ def loggedin(request):
     return redirect_to_view('/ARK/profile')
 
 def auth_view(request):
-    email = request.POST.get("email", "")
+    #not sure why, but the username string is required in order to properly extract the
+    #email address that's being passed in
+    email = request.POST.get("username", "")
     password = request.POST.get("password", "")
-    pdb.set_trace()
+    #pdb.set_trace()
     user = auth.authenticate(username = email, password = password)
     if user is not None:
         auth.login(request, user)
