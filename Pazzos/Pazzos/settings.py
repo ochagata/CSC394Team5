@@ -85,4 +85,6 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-AUTH_PROFILE_MODULE = 'ARK.PazzosUser'
+#AUTH_PROFILE_MODULE = 'ARK.models.PazzosUser'
+
+AUTH_USER_MODEL = 'ARK.PazzosUser'
