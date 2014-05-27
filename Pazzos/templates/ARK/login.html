@@ -6,17 +6,28 @@
 <h1>Log in</h1>
 <form action = "/accounts/auth/" method="post">{% csrf_token %}
     <label for="email">Email:</label>
-    <input type = "text" name = "username" value = "" id = "username"><br />
+    <input type = "text" name = "email" value = "" id = "email"><br />
     <label for = "password">Password:</label>
     <input type = "password" name = "password" value = "" id = "password"><br />
+        
+    {% if next %}
+    <input type = "hidden" name = "next" value = "{{next}}" id = "next" />
+    {% endif %}
         
     <input type = "submit" value = "Login" />
 </form>
 <br />
-<h2>Not a member? Register now!</h2>
+<h1>Not a member? Register now!</h1>
 
 <form action="/accounts/register/" method = "post">{% csrf_token %}
-    {{register}}
+    {% for field in register %}
+    {{ field.label_tag }} {{ field }}<br />
+    {% endfor %}
+    
+    {% if next %}
+    <input type = "hidden" name = "next" value = "{{next}}" id = "next" />
+    {% endif %}
+        
     <input type = "submit" value = "Register" />
 </form>
 

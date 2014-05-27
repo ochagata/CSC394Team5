@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 import pdb
-from ARK.admin import PazzosCreationForm
+from ARK.admin import PazzosCreationForm, PazzosChangeForm
 
 # Create your views here.
 from django.http import HttpResponse
@@ -18,50 +18,73 @@ def index(request):
 
 @login_required
 def profile(request):
-    #if request.method == 'POST':
-    #    form = PazzosProfileForm(request.POST, instance = request.user.profile)
-    #    if form.is_valid():
-    #        form.save()
-    #        return HttpResponseRedirect('/accounts/loggedin.html')
-    #else:
-    #    user = request.user
-    #    profile = user.profile
-    #    form = PazzosProfileForm(instance = profile)
     args = {}
     args.update(csrf(request))
-    
-    #args['form'] = form
-    
-    return render_to_response('profile.html', args)
+    if request.method == 'POST':
+        #pdb.set_trace()
+        form = PazzosChangeForm(request.POST, instance = request.user)
+        #password = form.fields['password']
+        
+        if form.is_valid():
+            form.save()
+            args['form'] = form
+    else:
+        form = PazzosChangeForm(instance = request.user)
+        args['form'] = form
+    return render_to_response('ARK/profile.html',args)
+
+
+#@login_required
+#def profile(request):
+#    if request.method == 'POST':
+#        form = PazzosProfileForm(request.POST, instance = request.user.profile)
+#        if form.is_valid():
+#            form.save()
+#            return HttpResponseRedirect('/accounts/loggedin.html')
+#    else:
+#        user = request.user
+#       # profile = user.profile
+#        #form = PazzosProfileForm(instance = profile)
+#    args = {}
+#    args.update(csrf(request))
+#    
+#    #args['form'] = form
+#    
+#    return render_to_response('profile.html', args)
 
 def login(request):
     c = {}
+    testVar = request.GET.get('next')
+    if testVar:
+        c['next'] = testVar
     c.update(csrf(request))
     c['register'] = PazzosCreationForm()
-    return render_to_response('login.html', c)
+    return render_to_response('ARK/login.html', c)
 
 def logout(request):
-    return render_to_response('logout.html')
+    auth.logout(request)
+    return render_to_response('ARK/logout.html')
 
 def loggedin(request):
-    return redirect_to_view('/ARK/profile')
+    return redirect_to_view('ARK/profile')
 
 def auth_view(request):
-    #not sure why, but the username string is required in order to properly extract the
-    #email address that's being passed in
-    email = request.POST.get("username", "")
+    email = request.POST.get("email", "")
     password = request.POST.get("password", "")
     #pdb.set_trace()
     user = auth.authenticate(username = email, password = password)
     if user is not None:
         auth.login(request, user)
-        return HttpResponseRedirect('/accounts/loggedin.html')
+        nextVar = request.POST.get("next","")
+        if nextVar != "":
+            return HttpResponseRedirect(nextVar)
+        return HttpResponseRedirect('ARK/index')
     else:
         c = {}
         c.update(csrf(request))
         c['register'] = PazzosCreationForm()
         c['invalid'] = True
-        return render_to_response('login.html', c)
+        return render_to_response('ARK/login.html', c)
 
 def register(request):
     if request.method == 'POST':
@@ -71,5 +94,5 @@ def register(request):
             return HttpResponseRedirect('/accounts/register_success')
 
 def register_success(request):
-    return HttpResponseRedirect('/ARK/profile')
+    return HttpResponseRedirect('ARK/profile')
 

@@ -30,15 +30,34 @@ class PazzosCreationForm(forms.ModelForm):
             user.save()
         return user
     
+#TODO: split this up into admin version and front-end version
+#the admin should be able to change passwords, but the front-end user shouldn't see that password hash field
 class PazzosChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
+    #password = forms.CharField(label = 'Current Password', widget = forms.PasswordInput)
+    
+    #newPassword1 = forms.CharField(label = 'New Password',widget = forms.PasswordInput)
+    #newPassword2 = forms.CharField(label = 'Confirm New Password', widget = forms.PasswordInput)
     
     class Meta:
         model = PazzosUser
-        fields = ('email','password','first_name','last_name','is_active','is_admin')
+        fields = ('email','password','first_name','last_name','is_active','is_admin','gender','handedness','age')
         
     def clean_password(self):
         return self.initial["password"]
+    
+    #def clean_newPassword2(self):
+    #    newPassword1 = self.cleaned_data.get("newPassword1")
+    #    newPassword2 = self.cleaned_data.get("newPassword2")
+    #    if newPassword1:
+    #        if not newPassword2:
+    #            raise forms.ValidationError("You must confirm your new password!")
+    #        if newPassword1 != newPassword2:
+    #            raise forms.ValidationError("New passwords don't match!")
+    #    elif newPassword2:
+    #        raise forms.ValidationError("You must fill out both new password fields!")
+    #    return newPassword2
+    
 
 class PazzosAdmin(UserAdmin):
     form = PazzosChangeForm

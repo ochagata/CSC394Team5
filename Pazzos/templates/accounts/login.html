@@ -8,6 +8,8 @@
     <input type = "text" name = "email" value = "" id = "email">
     <label for = "password">Password:</label>
     <input type = "password" name = "password" value = "" id = "password">
+        {% if %}
+    <input type = "hidden" name = "queryString" value = "{{request.GET.get("next")}}" />
         
     <input type = "submit" value = "login" />
 </form>
