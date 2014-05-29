@@ -104,9 +104,15 @@ class PazzosWordAdmin(admin.ModelAdmin):
     form = PazzosWordForm
     add_form = PazzosWordForm
     
-    list_display = ('word',)
+    list_display = ('word','wordLength')
     
     exclude = ('wordLength',)
+
+#class PazzosTestAdmin(admin.ModelAdmin):
+#    form = PazzosTestForm
+#    add_form = PazzosTestForm
+#    
+#    list_display
 
     
 admin.site.register(PazzosUser, PazzosAdmin)

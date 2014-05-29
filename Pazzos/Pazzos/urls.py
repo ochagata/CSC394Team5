@@ -3,6 +3,7 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+
 urlpatterns = patterns('',
     url(r'^accounts/login/$', 'ARK.views.login'),
     url(r'^accounts/logout/$', 'ARK.views.logout'),
