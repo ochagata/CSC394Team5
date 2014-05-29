@@ -3,10 +3,12 @@
 {% if invalid %}
 <p class="error">Sorry, that's not a valid username/password</p>
 {% endif %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{% static 'ARK/style.css' %}" />
 <h1>Log in</h1>
-<form action = "/accounts/auth/" method="post">{% csrf_token %}
+<form action = "/accounts/auth/" method="post" id="login">{% csrf_token %}
     <label for="email">Email:</label>
-    <input type = "text" name = "email" value = "" id = "email"><br />
+    <input type = "text" name = "email" value = "" id = "email" ><br />
     <label for = "password">Password:</label>
     <input type = "password" name = "password" value = "" id = "password"><br />
         
@@ -19,7 +21,7 @@
 <br />
 <h1>Not a member? Register now!</h1>
 
-<form action="/accounts/register/" method = "post">{% csrf_token %}
+<form action="/accounts/register/" method = "post" id="register">{% csrf_token %}
     {% for field in register %}
     {{ field.label_tag }} {{ field }}<br />
     {% endfor %}
@@ -32,3 +34,4 @@
 </form>
 
 {% endblock %}
+
