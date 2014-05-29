@@ -55,10 +55,10 @@ class PazzosUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length = 255, unique = True, db_index = True)
     first_name = models.CharField(max_length = 20)
     last_name = models.CharField(max_length = 20)
-    age = models.IntegerField()
-    gender = models.CharField(max_length = 1, choices = GENDER)
-    handedness = models.CharField(max_length = 1, choices = HAND)
-    english_level = models.CharField(max_length = 1, choices = ENGLISH)
+    age = models.IntegerField(blank = True)
+    gender = models.CharField(max_length = 1, choices = GENDER, blank = True)
+    handedness = models.CharField(max_length = 1, choices = HAND, blank = True)
+    english_level = models.CharField(max_length = 1, choices = ENGLISH, blank = True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name']
     
@@ -76,10 +76,22 @@ class PazzosUser(AbstractBaseUser, PermissionsMixin):
     
     def __str__(self):
         return "Name: " + self.get_full_name() + ". Email: " + self.email
+
+#word model: the "dictionary" where we should grab our words from for each test
+class PazzosTestWord(models.Model):
+    word = models.CharField(unique = True, db_index = True, max_length = 255)
+    wordLength = models.IntegerField()
     
+class PazzosTest(models.Model):
+    takenBy = models.ForeignKey(PazzosUser)
+    timeCompleted = models.TimeField()
+    correctCount = models.IntegerField()
     
+    #when django binds manytomanyfields to the sqlite database, it tries to create a corresponding link in the model that
+    #we specify which uses the name of the model in question. adding a related name allows more than one attribute to have
+    #references to the same model. these related_names must be unique
+    word_list = models.ManyToManyField(PazzosTestWord, related_name = "pazzostest_word_set")
+    correct_list = models.ManyToManyField(PazzosTestWord, related_name = "pazzostest_correct_set")
     
-    
-    
-#    
-#User.profile = property(lambda u : PazzosUser.objects.get_or_create(user = u)[0])
+    def save(self, *args, **kwargs):
+        correctCount = len(self.clean_fields['correctList'])

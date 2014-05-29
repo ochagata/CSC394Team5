@@ -5,6 +5,9 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from ARK.models import PazzosUser
+from ARK.models import PazzosTestWord
+
+import pdb
 
 # Register your models here.
 
@@ -58,7 +61,21 @@ class PazzosChangeForm(forms.ModelForm):
     #        raise forms.ValidationError("You must fill out both new password fields!")
     #    return newPassword2
     
-
+class PazzosWordForm(forms.ModelForm):
+    word = forms.CharField(max_length = 255)
+    
+    class meta:
+        model = PazzosTestWord
+        fields = ('word',)
+        
+    def save(self, commit = True):
+        #pdb.set_trace()
+        word = super(PazzosWordForm, self).save(commit = False)
+        word.wordLength = len(word.word)
+        if word:
+            word.save()
+        return word
+    
 class PazzosAdmin(UserAdmin):
     form = PazzosChangeForm
     add_form = PazzosCreationForm
@@ -81,7 +98,17 @@ class PazzosAdmin(UserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
+
+    
+class PazzosWordAdmin(admin.ModelAdmin):
+    form = PazzosWordForm
+    add_form = PazzosWordForm
+    
+    list_display = ('word',)
+    
+    exclude = ('wordLength',)
+
     
 admin.site.register(PazzosUser, PazzosAdmin)
-
-admin.site.unregister(Group)
+admin.site.register(PazzosTestWord, PazzosWordAdmin)
+#admin.site.unregister(Group)
