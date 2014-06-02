@@ -106,6 +106,8 @@ class PazzosWordAdmin(admin.ModelAdmin):
     
     list_display = ('word','wordLength')
     
+    #this prevents the wordLength field from appearing when adding a new word, as its length
+    #is supposed to be computed based on the actual word itself
     exclude = ('wordLength',)
 
 #class PazzosTestAdmin(admin.ModelAdmin):

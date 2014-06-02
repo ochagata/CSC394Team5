@@ -28,7 +28,8 @@ class PazzosUserManager(BaseUserManager):
             raise ValueError('Password is required')
         user = self.model( email = self.normalize_email(email),
                           first_name = first_name,
-                          last_name = last_name)
+                          last_name = last_name, is_staff = True,
+                          is_admin = True, is_superuser = True)
         user.set_password(password)
         user.save(using = self._db)
         return user
@@ -64,7 +65,8 @@ class PazzosUser(AbstractBaseUser, PermissionsMixin):
     
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    #is_superuser = models.BooleanField(default=False)
     
     objects = PazzosUserManager()
     
