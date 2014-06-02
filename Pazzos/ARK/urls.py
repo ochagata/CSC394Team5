@@ -8,5 +8,6 @@ admin.autodiscover()
 urlpatterns = patterns('',
     # ex: /ARK/
     url(r'^profile/$', 'ARK.views.profile'),
+
     url(r'^$', views.index, name='index'),
 )
