@@ -8,13 +8,14 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 import pdb
 from ARK.admin import PazzosCreationForm, PazzosChangeForm
+from django.shortcuts import redirect
 
 # Create your views here.
 from django.http import HttpResponse
 
 @login_required
 def index(request):
-    return HttpResponse("Hello, world. You're at the application")
+    return render_to_response('ARK/index.html')
 
 @login_required
 def profile(request):
@@ -78,7 +79,7 @@ def auth_view(request):
         nextVar = request.POST.get("next","")
         if nextVar != "":
             return HttpResponseRedirect(nextVar)
-        return HttpResponseRedirect('ARK/index')
+        return redirect('ARK.views.index')
     else:
         c = {}
         c.update(csrf(request))
@@ -91,7 +92,15 @@ def register(request):
         form = PazzosCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect('/accounts/register_success')
+            #pdb.set_trace()
+            user = auth.authenticate(email = form.data['email'], password = form.data['password1'])
+            #THIS CHECK SHOULD NEVER FAIL IF WE'RE LOGGING IN SOMEONE WHO JUST REGISTERED
+            if user is not None:
+                auth.login(request, user)
+                nextVar = request.POST.get("next", "")
+                if nextVar != "":
+                    return HttpResponseRedirect(nextVar)
+                return redirect ('ARK.views.profile')
 
 def register_success(request):
     return HttpResponseRedirect('ARK/profile')
