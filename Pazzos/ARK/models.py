@@ -1,3 +1,4 @@
+import datetime
 from django.db import models
 from django.contrib.auth.models import User, PermissionsMixin, BaseUserManager, AbstractBaseUser
 
@@ -28,7 +29,8 @@ class PazzosUserManager(BaseUserManager):
             raise ValueError('Password is required')
         user = self.model( email = self.normalize_email(email),
                           first_name = first_name,
-                          last_name = last_name)
+                          last_name = last_name, is_staff = True,
+                          is_admin = True, is_superuser = True)
         user.set_password(password)
         user.save(using = self._db)
         return user
@@ -64,7 +66,8 @@ class PazzosUser(AbstractBaseUser, PermissionsMixin):
     
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-    is_staff = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    #is_superuser = models.BooleanField(default=False)
     
     objects = PazzosUserManager()
     
@@ -81,17 +84,27 @@ class PazzosUser(AbstractBaseUser, PermissionsMixin):
 class PazzosTestWord(models.Model):
     word = models.CharField(unique = True, db_index = True, max_length = 255)
     wordLength = models.IntegerField()
+
+    def __str__(self):
+        return self.word
     
 class PazzosTest(models.Model):
     takenBy = models.ForeignKey(PazzosUser)
-    timeCompleted = models.TimeField()
-    correctCount = models.IntegerField()
-    
+    timeStarted = models.TimeField( default = datetime.datetime.now().time() )
+    timeCompleted = models.TimeField( default = datetime.datetime.now().time() )
+
     #when django binds manytomanyfields to the sqlite database, it tries to create a corresponding link in the model that
     #we specify which uses the name of the model in question. adding a related name allows more than one attribute to have
     #references to the same model. these related_names must be unique
     word_list = models.ManyToManyField(PazzosTestWord, related_name = "pazzostest_word_set")
     correct_list = models.ManyToManyField(PazzosTestWord, related_name = "pazzostest_correct_set")
-    
-    def save(self, *args, **kwargs):
-        correctCount = len(self.clean_fields['correctList'])
+
+    def __str__(self):
+        return str(self.id)
+
+#ValueError: "<PazzosTest: None>" needs to have a value for field "pazzostest" before this many-to-many relationship can be used.
+    # def clean(self):
+    #     if len(self.correct_list) > len(self.word_list):
+    #         raise ValidationError("The list of correct words is bigger than the list of words in the test!")
+    #     if not set(self.correct_list).issubset(set(self.word_list)):
+    #         raise ValidationError("The list of correct words contains words that aren't in the test!")

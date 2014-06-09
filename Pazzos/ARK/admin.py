@@ -6,6 +6,7 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 
 from ARK.models import PazzosUser
 from ARK.models import PazzosTestWord
+from ARK.models import PazzosTest
 
 import pdb
 
@@ -75,7 +76,23 @@ class PazzosWordForm(forms.ModelForm):
         if word:
             word.save()
         return word
-    
+
+class PazzosTestForm(forms.ModelForm):
+    class Meta:
+        model = PazzosTest
+        fields = ('takenBy','word_list', 'correct_list', 'timeStarted', 'timeCompleted' )
+
+    def clean(self):
+        correct = self.cleaned_data.get('correct_list')
+        total = self.cleaned_data.get('word_list')
+        correctSet = set(list(correct))
+        totalSet = set(list(total))
+        if len(correct) > len(total):
+            raise ValidationError("The list of correct words is bigger than the list of words in the test!")
+        if not set(list(correct)).issubset(set(list(total))):
+            raise ValidationError("The list of correct words contains words that aren't in the test!")
+        return self.cleaned_data
+
 class PazzosAdmin(UserAdmin):
     form = PazzosChangeForm
     add_form = PazzosCreationForm
@@ -98,7 +115,6 @@ class PazzosAdmin(UserAdmin):
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
-
     
 class PazzosWordAdmin(admin.ModelAdmin):
     form = PazzosWordForm
@@ -106,15 +122,18 @@ class PazzosWordAdmin(admin.ModelAdmin):
     
     list_display = ('word','wordLength')
     
+    #this prevents the wordLength field from appearing when adding a new word, as its length
+    #is supposed to be computed based on the actual word itself
     exclude = ('wordLength',)
 
-#class PazzosTestAdmin(admin.ModelAdmin):
-#    form = PazzosTestForm
-#    add_form = PazzosTestForm
-#    
-#    list_display
+class PazzosTestAdmin(admin.ModelAdmin):
+    form = PazzosTestForm
+    add_form = PazzosTestForm
+
+    #list_display = ('timeCompleted','correctCount','word_list','correct_list')
 
     
 admin.site.register(PazzosUser, PazzosAdmin)
 admin.site.register(PazzosTestWord, PazzosWordAdmin)
+admin.site.register(PazzosTest, PazzosTestAdmin)
 #admin.site.unregister(Group)
