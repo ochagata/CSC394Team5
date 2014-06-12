@@ -1,6 +1,7 @@
 import datetime
 from django.db import models
 from django.contrib.auth.models import User, PermissionsMixin, BaseUserManager, AbstractBaseUser
+import pdb
 
 class PazzosUserManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password = None):
@@ -35,9 +36,6 @@ class PazzosUserManager(BaseUserManager):
         user.save(using = self._db)
         return user
         
-    
-
-# Create your models here.
 class PazzosUser(AbstractBaseUser, PermissionsMixin):
     GENDER = (
         ('M', 'Male'),
@@ -65,10 +63,8 @@ class PazzosUser(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = ['first_name','last_name']
     
     is_active = models.BooleanField(default=True)
-    is_admin = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
-    #is_superuser = models.BooleanField(default=False)
-    
+
     objects = PazzosUserManager()
     
     def get_full_name(self):
@@ -101,10 +97,3 @@ class PazzosTest(models.Model):
 
     def __str__(self):
         return str(self.id)
-
-#ValueError: "<PazzosTest: None>" needs to have a value for field "pazzostest" before this many-to-many relationship can be used.
-    # def clean(self):
-    #     if len(self.correct_list) > len(self.word_list):
-    #         raise ValidationError("The list of correct words is bigger than the list of words in the test!")
-    #     if not set(self.correct_list).issubset(set(self.word_list)):
-    #         raise ValidationError("The list of correct words contains words that aren't in the test!")
