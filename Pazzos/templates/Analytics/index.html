@@ -1,4 +1,6 @@
 <!DOCTYPE HTML>
+{% extends "ARK/pazzos_base.html" %}
+	{% block content%}
         {% load staticfiles %}
 <html>
 	<head>
@@ -119,6 +121,7 @@ $(function () {
 		</script>
 	</head>
 	<body>
+	<br>
     <script src="{% static 'ARK/js/highcharts.js' %}" ></script>
     <script src="{% static 'ARK/js/modules/data.js' %}" ></script>
     <script src="{% static 'ARK/js/modules/drilldown.js' %}" ></script>
@@ -170,3 +173,4 @@ Very Hard 25.0	0.09%</pre>
 
 	</body>
 </html>
+{% endblock%}

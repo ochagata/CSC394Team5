@@ -1,6 +1,7 @@
 {% extends "ARK/pazzos_base.html" %}
-
 {% block content %}
+<br>
+<div id="wrap1">
 <h2>Profile</h2>
 {% for field in form %}
 {{field.error}}
@@ -13,5 +14,5 @@
         {% endfor %}
     <input type="submit" value="Update" />
 </form>
-
+</div>
 {% endblock %}
