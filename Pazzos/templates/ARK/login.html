@@ -6,6 +6,8 @@
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'ARK/style.css' %}" />
 
+<br>
+<div id="wrap1">
 <h1>Log in</h1>
 <form action = "/accounts/auth/" method="post" id="login">{% csrf_token %}
     <label for="email">Email:</label>
@@ -20,6 +22,9 @@
     <input type = "submit" value = "Login" />
 </form>
 <br />
+</div>
+
+<div id="wrap2">
 <h1>Not a member? Register now!</h1>
 
 <form action="/accounts/register/" method = "post" id="register">{% csrf_token %}
@@ -33,5 +38,6 @@
         
     <input type = "submit" value = "Register" />
 </form>
+</div>
 {% endblock %}
 
