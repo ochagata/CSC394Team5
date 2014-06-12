@@ -1,24 +1,34 @@
 <html>
     <head>
+		{% load staticfiles %}
         <!-- load in jQuery -->
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <title>
-            
-        </title>
+		<link rel="stylesheet" type="text/css" href="{% static 'ARK/css/style.css' %}" />
+        <title>CSC394 Team5</title>
     </head>
-    <body>
-    <div id="header">
-        <div id="user-tools">
-            Welcome
-            <strong>{% firstof user.get_short_name user.get_username %}</strong>.
-            {% block userlinks %}
+	<nav>
+	<ul>
+		<li><a href="{% url 'ARK.views.index' %}">Home</a></li>
+		<li><a href="{% url 'ARK.views.profile' %}">My Profile</a></li>
+		<li><a href="">Other</a></li>
+		<li><a href="">User Tools</a>
+			<ul>
+				<li>{% block userlinks %}
                 {% if user.is_authenticated %}
                 <a href="{% url 'ARK.views.logout' %}">Log out</a>
                 {% else %}
                 <a href="{% url 'ARK.views.login' %}">Log in</a>
                 {% endif %}
-            {% endblock %}
-        </div>
+				{% endblock %}
+				</li>
+			</ul>
+		<li id="welcome"> Welcome <strong>{% firstof user.get_short_name user.get_username %}</strong>.</a></li>
+		</li>
+    </ul>
+</nav>
+    <body>
+    <div id="header">
+        
         {% block nav-global %}{% endblock %}
     </div>
     {% block content %}{% endblock %}
