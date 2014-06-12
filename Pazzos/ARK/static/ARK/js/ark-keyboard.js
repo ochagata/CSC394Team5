@@ -166,7 +166,6 @@
                     data: {'x_coords': sokgraph_x, 'y_coords':sokgraph_y, 'letters': letters},
                     dataType: "html",
                     success:function(){alert("ajax hookup successful!");},
-                    error: function(){alert("unsuccessful");}
                 })
 
                 //get the arrays ready to store the next sokgraph and stop tracking their
