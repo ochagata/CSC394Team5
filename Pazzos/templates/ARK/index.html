@@ -1,4 +1,43 @@
 {% extends "ARK/pazzos_base.html" %}
+{% load staticfiles %}
+
 {% block content %}
-Hello world! You're at the application.
+<link rel="stylesheet" type="text/css" href="{% static 'ARK/css/ark_keyboard_styles.css' %}" />
+<script src="{% static 'ARK/js/ark-keyboard.js' %}" ></script>
+<body>
+    <canvas id="can" width="750" height="410" style="position:absolute;top:40px;border:4px solid;"></canvas>
+<div id="row1">
+    <div class="keyO" id="q">q</div>
+    <div class="keyE" id="w">w</div>
+    <div class="keyO" id="e">e</div>
+    <div class="keyE" id="r">r</div>
+    <div class="keyO" id="t">t</div>
+    <div class="keyE" id="y">y</div>
+    <div class="keyO" id="u">u</div>
+    <div class="keyE" id="i">i</div>
+    <div class="keyO" id="o">o</div>
+    <div class="keyE" id="p">p</div>
+</div>
+<div id="row2">
+    <div class="keyO" id="a">a</div>
+    <div class="keyE" id="s">s</div>
+    <div class="keyO" id="d">d</div>
+    <div class="keyE" id="f">f</div>
+    <div class="keyO" id="g">g</div>
+    <div class="keyE" id="h">h</div>
+    <div class="keyO" id="j">j</div>
+    <div class="keyE" id="k">k</div>
+    <div class="keyO" id="l">l</div>
+</div>
+<div id="row3">
+    <div class="keyO" id="z">z</div>
+    <div class="keyE" id="x">x</div>
+    <div class="keyO" id="c">c</div>
+    <div class="keyE" id="v">v</div>
+    <div class="keyO" id="b">b</div>
+    <div class="keyE" id="n">n</div>
+    <div class="keyO" id="m">m</div>
+</div>
+</body>
+
 {% endblock %}
