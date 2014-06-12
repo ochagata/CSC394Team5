@@ -9,13 +9,15 @@ from django.contrib import auth
 import pdb
 from ARK.admin import PazzosCreationForm, PazzosChangeForm
 from django.shortcuts import redirect
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 
 # Create your views here.
 from django.http import HttpResponse
 
 @login_required
 def index(request):
-    return render_to_response('ARK/index.html')
+    return render_to_response('ARK/index.html',None, context_instance=RequestContext(request))
 
 @login_required
 def profile(request):
@@ -32,7 +34,7 @@ def profile(request):
     else:
         form = PazzosChangeForm(instance = request.user)
         args['form'] = form
-    return render_to_response('ARK/profile.html',args)
+    return render_to_response('ARK/profile.html',args,context_instance=RequestContext(request))
 
 
 #@login_required
@@ -60,11 +62,11 @@ def login(request):
         c['next'] = testVar
     c.update(csrf(request))
     c['register'] = PazzosCreationForm()
-    return render_to_response('ARK/login.html', c)
+    return render_to_response('ARK/login.html', c,context_instance=RequestContext(request))
 
 def logout(request):
     auth.logout(request)
-    return render_to_response('ARK/logout.html')
+    return render_to_response('ARK/logout.html',None, context_instance=RequestContext(request))
 
 def loggedin(request):
     return redirect_to_view('ARK/profile')
@@ -85,7 +87,7 @@ def auth_view(request):
         c.update(csrf(request))
         c['register'] = PazzosCreationForm()
         c['invalid'] = True
-        return render_to_response('ARK/login.html', c)
+        return render_to_response('ARK/login.html', c, context_instance=RequestContext(request))
 
 def register(request):
     if request.method == 'POST':
