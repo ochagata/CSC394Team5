@@ -30,6 +30,27 @@
         canvas.addEventListener("mouseout", function(e) {
             onKeyUp(e)
         }, false);
+        $('.row').each(function()
+        {
+           var $this = $(this);
+            $this.children().each(function()
+            {
+                var offset = $(this).position();
+                var curHeight = $(this).height();
+                var curWidth = $(this).width();
+                var curTop = offset.top;
+                var curLeft = offset.left;
+                var centerX = curLeft + (curWidth / 2);
+                var centerY = curTop + (curHeight / 2);
+                var entry = {
+                    letter: $(this).attr('id'),
+                    center_x: centerX,
+                    center_y: centerY
+                }
+                letters.push(entry);
+
+            });
+        });
     });
 
 
@@ -75,7 +96,7 @@
                                 var yCenter = newTop + (newHeight / 2);
                                 if (currY > yCenter - 50 && currY < yCenter + 50) {
                                     if (currX > xCenter - 50 && currX < xCenter + 50) {
-                                        letters.push($(this).attr('id'));
+                                        //letters.push($(this).attr('id'));
                                         //alert("Id: " + $(this).attr('id'));
                                     }
                                 }
@@ -138,11 +159,11 @@
 //                alert("X length: " + sokgraph_x.length);
 //                alert("Y length: " + sokgraph_y.length);
 
-                alert("Letters: " + letters);
+               // alert("Letters: " + letters);
                 $.ajax({
                     type:"POST",
                     url: "/ARK/test_ajax/",
-                    data: {'x_coords': sokgraph_x, 'y_coords':sokgraph_y},
+                    data: {'x_coords': sokgraph_x, 'y_coords':sokgraph_y, 'letters': letters},
                     dataType: "html",
                     success:function(){alert("ajax hookup successful!");},
                     error: function(){alert("unsuccessful");}
@@ -152,7 +173,7 @@
                 //coordinates until they click again
                 sokgraph_x = [];
                 sokgraph_y = [];
-                letters = [];
+                //letters = [];
                 bTrackCoords = false;
                 prevX = 0;
                 prevY = 0;
