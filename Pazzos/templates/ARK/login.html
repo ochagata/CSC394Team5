@@ -5,6 +5,7 @@
 {% endif %}
 {% load staticfiles %}
 <link rel="stylesheet" type="text/css" href="{% static 'ARK/style.css' %}" />
+
 <h1>Log in</h1>
 <form action = "/accounts/auth/" method="post" id="login">{% csrf_token %}
     <label for="email">Email:</label>
@@ -32,6 +33,5 @@
         
     <input type = "submit" value = "Register" />
 </form>
-
 {% endblock %}
 
