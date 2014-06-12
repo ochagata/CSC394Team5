@@ -95,5 +95,12 @@ class PazzosTest(models.Model):
     word_list = models.ManyToManyField(PazzosTestWord, related_name = "pazzostest_word_set")
     correct_list = models.ManyToManyField(PazzosTestWord, related_name = "pazzostest_correct_set")
 
+
+class PazzosKeyboard(models.Model):
+    row1 = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']
+    row2 = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']
+    row3 = ['z', 'x', 'c', 'v', 'b', 'n', 'm']
+
+
     def __str__(self):
         return str(self.id)

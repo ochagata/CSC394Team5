@@ -112,3 +112,6 @@ def ajaxTest(request):
         coords = request.POST.getlist('x_coords')
         pdb.set_trace()
 
+def analytics(request):
+    return render_to_response('Analytics/index.html',None, context_instance=RequestContext(request))
+
