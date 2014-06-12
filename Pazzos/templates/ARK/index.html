@@ -5,48 +5,62 @@
 <link rel="stylesheet" type="text/css" href="{% static 'ARK/css/ark_keyboard_styles.css' %}" />
 <script src="{% static 'ARK/js/ark-keyboard.js' %}" ></script>
 <body>
+	<br><br>
+	<div id="topWindows">
+		<div id="wordWindow">
+			<p>Type the word shown:</p>
+			<div id="currentWord">
+				<p>Example</p>
+			</div>
+		</div>
+		<div id="resultsWindow">
+			<p>Results</p>
+			<div id="resultsList">
+				<ol>
+					<li>Example</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+	<div id="keyboard">
+		<canvas id="can" width="900" height="350" style="border:4px solid;position:absolute;">
 
-<h1>Hello world
-<br /> here's some more text<br />and some more!</h1>
-<div id="keyboard">
-    <canvas id="can" width="900" height="410" style="border:4px solid;position:absolute;">
-
-    </canvas>
-    <div id="keys">
-        <div class = "row" id="r1">
-            <div class="key O" id="q">Q</div>
-            <div class="key E" id="w">W</div>
-            <div class="key O" id="e">E</div>
-            <div class="key E" id="r">R</div>
-            <div class="key O" id="t">T</div>
-            <div class="key E" id="y">Y</div>
-            <div class="key O" id="u">U</div>
-            <div class="key E" id="i">I</div>
-            <div class="key O" id="o">O</div>
-            <div class="key E" id="p">P</div>
-        </div>
-        <div class = "row" id="r2">
-            <div class="key O" id="a">A</div>
-            <div class="key E" id="s">S</div>
-            <div class="key O" id="d">D</div>
-            <div class="key E" id="f">F</div>
-            <div class="key O" id="g">G</div>
-            <div class="key E" id="h">H</div>
-            <div class="key O" id="j">J</div>
-            <div class="key E" id="k">K</div>
-            <div class="key O" id="l">L</div>
-        </div>
-        <div class="row" id="r3">
-            <div class="key O" id="z">Z</div>
-            <div class="key E" id="x">X</div>
-            <div class="key O" id="c">C</div>
-            <div class="key E" id="v">V</div>
-            <div class="key O" id="b">B</div>
-            <div class="key E" id="n">N</div>
-            <div class="key O" id="m">M</div>
-        </div>
-    </div>
-</div>
+		</canvas>
+		<div id="keys">
+			<div class = "row" id="r1">
+				<div class="key O" id="q">Q</div>
+				<div class="key E" id="w">W</div>
+				<div class="key O" id="e">E</div>
+				<div class="key E" id="r">R</div>
+				<div class="key O" id="t">T</div>
+				<div class="key E" id="y">Y</div>
+				<div class="key O" id="u">U</div>
+				<div class="key E" id="i">I</div>
+				<div class="key O" id="o">O</div>
+				<div class="key E" id="p">P</div>
+			</div>
+			<div class = "row" id="r2">
+				<div class="key O" id="a">A</div>
+				<div class="key E" id="s">S</div>
+				<div class="key O" id="d">D</div>
+				<div class="key E" id="f">F</div>
+				<div class="key O" id="g">G</div>
+				<div class="key E" id="h">H</div>
+				<div class="key O" id="j">J</div>
+				<div class="key E" id="k">K</div>
+				<div class="key O" id="l">L</div>
+			</div>
+			<div class="row" id="r3">
+				<div class="key O" id="z">Z</div>
+				<div class="key E" id="x">X</div>
+				<div class="key O" id="c">C</div>
+				<div class="key E" id="v">V</div>
+				<div class="key O" id="b">B</div>
+				<div class="key E" id="n">N</div>
+				<div class="key O" id="m">M</div>
+			</div>
+		</div>
+	</div>
 </body>
 
 {% endblock %}

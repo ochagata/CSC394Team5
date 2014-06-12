@@ -1,8 +1,7 @@
-#content {text-align:center;}
-
 /* BEGIN NAV MENU */
 nav {
 	top:0;
+	left:0;
 	background-color: white;
 	height:30px;
 	position: fixed;
@@ -79,7 +78,54 @@ nav ul li ul li a {
 }
 /* END NAV MENU */
 
+body{
+	background: url(pics/background.jpg) 50% 0 repeat fixed; min-height: 1000px;
+}
+
+#content {
+	text-align:center;
+}
+
 #welcome {
 	float: right;
 	padding: 7px 15px 3px 15px;
+}
+
+#keyboard {
+	background: white;
+	height: 355px;
+	width: 905px;	
+	margin: 0 auto;
+}
+
+#topWindows {
+	width: 100%;
+	height: 250px;
+}
+
+#wordWindow {
+	text-align:center;
+	background: white;
+	height: 250px;
+	width: 500px;
+	float: left;
+	border: 2px solid;
+}
+#currentWord{
+	width: 200px;	
+	border: 2px solid;
+	margin: 0 auto;
+}
+
+#resultsWindow {
+	text-align:center;
+	background: white;
+	height: 250px;
+	width: 500px;
+	float: right;
+	border: 2px solid;
+}
+#resultsList {
+	width: 200px;	
+	margin: 0 auto;
 }
