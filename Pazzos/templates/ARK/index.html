@@ -6,6 +6,10 @@
 <script src="{% static 'ARK/js/ark-keyboard.js' %}" ></script>
 <body>
 	<br><br>
+	<div id="progressBar">
+		<progress id="prog" max="100" value="15"></progress>
+	</div>
+	<br>
 	<div id="topWindows">
 		<div id="wordWindow">
 			<p>Type the word shown:</p>
@@ -13,8 +17,18 @@
 				<p>Example</p>
 			</div>
 		</div>
+		<div id="choiceWindow">
+			<div id="choiceDrop">
+				<p style="text-align:center;">Choose a Test:</p>
+				<select style="width:200px;">
+					  <option value="easy">Easy</option>
+					  <option value="medium">Medium</option>
+					  <option value="hard">Hard</option>
+				</select>
+			</div>
+		</div>
 		<div id="resultsWindow">
-			<p>Results</p>
+			<p style="text-align:center;">Results</p>
 			<div id="resultsList">
 				<ol>
 					<li>Example</li>

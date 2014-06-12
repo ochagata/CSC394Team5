@@ -82,8 +82,38 @@ body{
 	background: url(pics/background.jpg) 50% 0 repeat fixed; min-height: 1000px;
 }
 
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+   appearance: none;
+}
+progress[value]::-webkit-progress-bar {
+  background-color: #eee;
+  border-radius: 2px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
 #content {
 	text-align:center;
+}
+
+#prog{
+	width: 100%;
+	height: 25px;
+	background-color: #eee;
+	border-radius: 2px;
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
+
+#progressBar{
+	position:fixed;
+	top: 32px;
+	z-index: 1;
+	left: 15%;
+	padding: 5px 5px 5px 5px;
+	width: 70%;
+	margin: 0 auto;
+	background: white;
 }
 
 #welcome {
@@ -102,12 +132,11 @@ body{
 	width: 100%;
 	height: 250px;
 }
-
 #wordWindow {
 	text-align:center;
 	background: white;
 	height: 250px;
-	width: 500px;
+	width: 33%;
 	float: left;
 	border: 2px solid;
 }
@@ -117,11 +146,23 @@ body{
 	margin: 0 auto;
 }
 
+#choiceWindow {
+	position: absolute;
+	left:50%;
+	height: 250px;
+	width: 250px;
+	margin-left: -125px;
+	border: 2px solid;
+	background: white;
+}
+#choiceDrop {
+	width: 200px;
+	margin: 0 auto;
+}
 #resultsWindow {
-	text-align:center;
 	background: white;
 	height: 250px;
-	width: 500px;
+	width: 33%;
 	float: right;
 	border: 2px solid;
 }
