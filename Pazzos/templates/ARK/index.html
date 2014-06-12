@@ -3,7 +3,31 @@
 
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'ARK/css/ark_keyboard_styles.css' %}" />
-<script src="{% static 'ARK/js/ark-keyboard.js' %}" ></script>
+        <script src="{% static  'ARK/js/helpers/inheritance.js' %}"></script>
+  <script src="{% static 'ARK/js/helpers/EventHelper.js' %}"></script>
+
+  <!-- Hierarchical models -->
+  <script src="{% static 'ARK/js/models/Exportable.js' %}"></script>
+    <script src="{% static 'ARK/js/models/Observable.js' %}"></script>
+      <script src="{% static 'ARK/js/models/GraphicalGroup.js' %}"></script>
+      <script src="{% static 'ARK/js/models/Layer.js' %}"></script>
+      <script src="{% static 'ARK/js/models/Mouse.js' %}"></script>
+      <script src="{% static 'ARK/js/models/Draggable.js' %}"></script>
+        <script src="{% static 'ARK/js/models/Graphical.js' %}"></script>
+          <script src="{% static 'ARK/js/models/GraphicalCoordinate.js' %}"></script>
+          <script src="{% static 'ARK/js/models/DragField.js' %}"></script>
+          <script src="{% static 'ARK/js/models/Text.js' %}"></script>
+          <script src="{% static 'ARK/js/models/Shape.js' %}"></script>
+            <script src="{% static 'ARK/js/models/Rectangle.js' %}"></script>
+              <script src="{% static 'ARK/js/models/FilledRectangle.js' %}"></script>
+                <script src="{% static 'ARK/js/models/Key.js' %}"></script>
+
+  <!-- Scenes -->
+  <script src="{% static 'ARK/js/models/Scene.js' %}"></script>
+    <script src="{% static 'ARK/js/models/KeyboardScene.js' %}"></script>
+
+  <!-- App -->
+  <script src="{% static 'ARK/js/SwypeApp.js' %}"></script>
 <body>
 	<br><br>
 	<div id="progressBar">
@@ -36,45 +60,38 @@
 			</div>
 		</div>
 	</div>
-	<div id="keyboard">
-		<canvas id="can" width="900" height="350" style="border:4px solid;position:absolute;">
+	<style>
+  body {
+    margin: 0px;
+    padding: 0px;
+  }
 
-		</canvas>
-		<div id="keys">
-			<div class = "row" id="r1">
-				<div class="key O" id="q">Q</div>
-				<div class="key E" id="w">W</div>
-				<div class="key O" id="e">E</div>
-				<div class="key E" id="r">R</div>
-				<div class="key O" id="t">T</div>
-				<div class="key E" id="y">Y</div>
-				<div class="key O" id="u">U</div>
-				<div class="key E" id="i">I</div>
-				<div class="key O" id="o">O</div>
-				<div class="key E" id="p">P</div>
-			</div>
-			<div class = "row" id="r2">
-				<div class="key O" id="a">A</div>
-				<div class="key E" id="s">S</div>
-				<div class="key O" id="d">D</div>
-				<div class="key E" id="f">F</div>
-				<div class="key O" id="g">G</div>
-				<div class="key E" id="h">H</div>
-				<div class="key O" id="j">J</div>
-				<div class="key E" id="k">K</div>
-				<div class="key O" id="l">L</div>
-			</div>
-			<div class="row" id="r3">
-				<div class="key O" id="z">Z</div>
-				<div class="key E" id="x">X</div>
-				<div class="key O" id="c">C</div>
-				<div class="key E" id="v">V</div>
-				<div class="key O" id="b">B</div>
-				<div class="key E" id="n">N</div>
-				<div class="key O" id="m">M</div>
-			</div>
-		</div>
-	</div>
+  canvas {
+    margin: 0px;
+    padding: 0px;
+    border: thin solid black;
+    background: #EEE;
+  }
+</style>
+<script>
+window.onload = function(){
+  document.getElementById("canvas").width=window.innerWidth;
+  document.getElementById("canvas").height=(window.innerWidth/768)*292;
+  if(document.getElementById("canvas").getContext){
+    // Startup App
+    var App = new SwypeApp(
+      document.getElementById("canvas")
+    );
+    App.loadScene(new KeyboardScene());
+    App.run();
+  }else{
+    // Show error
+    alert("Error, could not load Swype app");
+  }
+};
+</script>
+<canvas id="canvas" width="900" height="350"></canvas>
+<textarea cols='30' rows='5' id='log'></textarea>
 </body>
 
 {% endblock %}
