@@ -5,7 +5,7 @@ nav {
 	background-color: white;
 	height:30px;
 	position: fixed;
-	z-index: 1;
+	z-index: 2;
 	width: 100%;
 	border-bottom: 1px solid #567682;
 }
@@ -95,6 +95,21 @@ progress[value]::-webkit-progress-bar {
 
 #content {
 	text-align:center;
+}
+
+#wrap1 {
+	margin-left: 100px;
+	float: left;
+	background: white;
+	display: inline-block;
+	padding: 5px 5px 5px 5px;
+}
+#wrap2 {
+	margin-right: 100px;
+	float: right;
+	background: white;
+	display: inline-block;
+	padding: 5px 5px 5px 5px;
 }
 
 #prog{
