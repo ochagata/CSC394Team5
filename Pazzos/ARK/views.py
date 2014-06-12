@@ -107,3 +107,8 @@ def register(request):
 def register_success(request):
     return HttpResponseRedirect('ARK/profile')
 
+def ajaxTest(request):
+    if request.method == 'POST':
+        coords = request.POST.getlist('x_coords')
+        pdb.set_trace()
+
